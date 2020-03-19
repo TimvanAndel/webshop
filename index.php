@@ -13,14 +13,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <title>CMS Webshop</title>
+        <title>Login Users</title>
         <link rel="stylesheet" href="assets/css/bootstrap.css">
     </head>
     <body>
         <div class="sidenav">
             <div class="login-main-text">
                 <h2>Webshop - Tim van Andel<br> Login voor users</h2>
-                <p>Dit is een eigen CMS voor de webshop</p>
             </div>
         </div>
         <div class="main">
@@ -37,9 +36,9 @@
                       </div>
                       
                       <button type="submit" class="btn btn-black">Login</button>
-                      <a href="<?= BASEHREF;?>view/register.php" class="btn btn-secondary">Registreer</a>
+                      <a href="<?= BASEHREF;?>view/register_user.php" class="btn btn-secondary">Registreer</a>
                       <div class="form-group" id="message">
-                        hi
+                      
                       </div>
                    </form>
                 </div>

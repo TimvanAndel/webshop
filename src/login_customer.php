@@ -1,12 +1,12 @@
 <?php
 session_start();
-$_SESSION['loggedin_costumer'] = false;
+$_SESSION['loggedin_customer'] = false;
 function logIn(){
     global $con;
     $eMail='';
     // database connecten
     // inloggen
-    // checken of de user in de database staat
+    // checken of de customer in de database staat
     if(isset($_POST['field_email']) && $_POST['field_email'] != ''){
         $eMail = dbp($_POST['field_email']);
     } else {
@@ -47,7 +47,7 @@ function logIn(){
                         $_SESSION['loggedin_customer'] = true;
                         $_SESSION['email_customer'] = $eMail;
                         $_SESSION['password_customer'] = $passWord;                    
-                        header("Location: view/index_customer.php");
+                        header("Location: index_customer.php");
                     } else{
                         echo "wachtwoord onjuist";
                     }
@@ -55,7 +55,10 @@ function logIn(){
                    
         
             } else {
+            
             echo "gebruiker bestaad niet";
+            echo "<script>document.getElementById('message').innerHTML = 'hello';</script>";
+            
         }
         
     }

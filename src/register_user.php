@@ -56,7 +56,9 @@ function setFormData(){
     	echo mysqli_error($con)." - ";
     	exit(__LINE__);
     } else {
-    	echo "Gebruiker toegevoegd";
+        echo "Gebruiker toegevoegd";
+        header("Location: ../index.php");
+        
     	$query1->close();
     }
 

@@ -109,7 +109,8 @@ function setFormData(){
     	echo mysqli_error($con)." - ";
     	exit(__LINE__);
     } else {
-    	echo "Gebruiker toegevoegd";
+        echo "Gebruiker toegevoegd";
+        header("Location: login_customer.php");
     	$query1->close();
     }
 

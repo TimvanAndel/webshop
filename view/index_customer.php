@@ -2,16 +2,16 @@
 session_start();
 include("../config/connect.php");
     
-if (isset($_SESSION['loggedin_user']) && $_SESSION['loggedin_user'] == true) {
+if (isset($_SESSION['loggedin_customer']) && $_SESSION['loggedin_customer'] == true) {
     
     if(isset($_POST["logout"])){
         session_destroy();
-        header("Location: ../index.php");
+        header("Location: login_customer.php");
     }
     
 
 } else {
-    header("Location: ../index.php");
+    header("Location: login_customer.php");
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ if (isset($_SESSION['loggedin_user']) && $_SESSION['loggedin_user'] == true) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <title>Hoofdpagina Users</title>
+        <title>Hoofdpagina Customers</title>
         <link rel="stylesheet" href="../assets/css/bootstrap.css">
     </head>
     <body>
@@ -35,7 +35,7 @@ if (isset($_SESSION['loggedin_user']) && $_SESSION['loggedin_user'] == true) {
         <div class="main">
             <div class="col-md-6 col-sm-12">
                 <div class="login-form">
-                   <?php echo $_SESSION['email_user'];?>
+                   <?php echo $_SESSION['email_customer'];?>
                 </div>
             </div>
         </div>
@@ -45,6 +45,6 @@ if (isset($_SESSION['loggedin_user']) && $_SESSION['loggedin_user'] == true) {
 <?php
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: ../index.php");
+    header("Location: login_customer.php");
 }
 ?>
