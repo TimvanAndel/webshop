@@ -1,18 +1,6 @@
 <?php
-session_start();
+include("../src/checklogin_customer.php");
 include("../config/connect.php");
-    
-if (isset($_SESSION['loggedin_customer']) && $_SESSION['loggedin_customer'] == true) {
-    
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("Location: login_customer.php");
-    }
-    
-
-} else {
-    header("Location: login_customer.php");
-}
 ?>
 <!DOCTYPE html>
     <html lang="en">
