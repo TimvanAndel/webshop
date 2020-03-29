@@ -80,7 +80,7 @@ if(!empty($_POST)){
       <div class="album py-5 bg-light">
         <div class="container">
   
-<!-- 
+    <!-- 
         name
         description
         category_id
@@ -101,9 +101,7 @@ if(!empty($_POST)){
         </div>
 
         <div class="form-group">
-            <label for="inputCategory">Categorie: <?php while($category = $qry2->fetch_assoc()){
-                echo $category['id'] . "= " . $category['name'] . " | ";
-                }?></label>
+            <label for="inputCategory">Categorie: <?php while($category = $qry2->fetch_assoc()){ echo $category['id'] . "= " . $category['category_name'] . " | "; }?></label>
             <input value="<?php echo $result['category_id'];?>" type="text" class="form-control" id="InputCategory" aria-describedby="Category" name="product_category">
         </div>
 

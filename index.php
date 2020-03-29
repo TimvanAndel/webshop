@@ -25,7 +25,7 @@
         <div class="main">
             <div class="col-md-6 col-sm-12">
                 <div class="login-form">
-                   <form method="post" action="<?= BASEHREF; ?>">
+                   <form method="post" >
                       <div class="form-group">
                          <label>E-mail adres</label>
                          <input type="text" class="form-control" name="field_email" placeholder="Email" required>
