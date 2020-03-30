@@ -1,5 +1,5 @@
 <?php
-include("../src/checklogin_customer.php");
+include("../src/checklogin_user.php");
 include("../config/connect.php");
 ?>
 <!doctype html>
@@ -43,7 +43,7 @@ include("../config/connect.php");
             <strong>Tim van Andel - Webshop</strong>
         </a>
         <form method="post">
-            <button type="submit" class="btn btn-primary" name="logout">Log out</button>
+            <button type="submit" class="btn btn-primary" name="logout">Log uit</button>
         </form>
           
         </div>
@@ -54,24 +54,78 @@ include("../config/connect.php");
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Producten</h1>
+          <h1 class="jumbotron-heading">User paneel</h1>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
         <div class="container">
-  
-    <!-- 
-        name
-        description
-        category_id
-        price
-        color  
-        weight
-        active
-     -->
-     <p>hier tekst</p>
-  
+        <div class="row">
+<!-- __________________________________________ -->
+
+          <div class="col-md-4" style="float: left;">
+            <div class="card mb-4 shadow-sm" >
+              <div class="card-body"> 
+                <strong class="card-text" style="font-size: larger;">Producten</strong>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">   
+
+                    <form action="products/product_overzicht.php">
+                      
+                      <small style="font-size: large">producten toevoegen, wijzigen of verweideren</small><br>
+                      <button type="submit" class="btn btn-primary">Ga naar producten</button>
+                    </form>        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-4" style="float: left;">
+            <div class="card mb-4 shadow-sm" >
+              <div class="card-body"> 
+                <strong class="card-text" style="font-size: larger;">Catogorieën</strong>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">   
+
+                    <form action="category/category_overzicht.php">
+                      
+                      <small style="font-size: large">Catogorieën toevoegen, wijzigen of verweideren</small><br>
+                      <button type="submit" class="btn btn-primary">Ga naar Catogorieën</button>
+                    </form>        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-4" style="float: left;">
+            <div class="card mb-4 shadow-sm" >
+              <div class="card-body"> 
+                <strong class="card-text" style="font-size: larger;">Klanten</strong>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">   
+
+                    <form action="category/category_overzicht.php">
+                      
+                      <small style="font-size: large">Klanten toevoegen, wijzigen of verweideren</small><br>
+                      <button type="submit" class="btn btn-primary">Ga naar Klanten</button>
+                    </form>        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
         </div>
       </div>
 

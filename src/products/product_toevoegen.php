@@ -3,7 +3,7 @@ function addProduct(){
     global $con;
 
 
-    $target_dir = "../../assets/img";
+    $target_dir = "../../assets/img/";
     $uploadOk = 1;
 
     if(isset($_POST["submit"])||!empty($_FILES["fileToUpload"]["name"])) {

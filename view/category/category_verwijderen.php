@@ -1,20 +1,13 @@
 <?php
 include("../../config/connect.php");
-include("../../src/products/product_verweideren.php");
+
 $id = $_GET['del'];
-
-$qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
-product_image.image AS product_image
-FROM product 
-INNER JOIN product_image ON product.id = product_image.product_id 
-INNER JOIN category ON product.category_id = category.id 
-WHERE product.id= $id");
-if($qry === false){   
-	echo mysqli_error($con)." - ";
-	exit(__LINE__);
-} else {
-
+$qrySelect = $con->query("SELECT * FROM category WHERE id= $id");
+$resultSelect = $qrySelect->fetch_assoc();
 ?>
+
+
+
 
 
 <!doctype html>
@@ -54,14 +47,13 @@ if($qry === false){
       </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-        <a href="product_overzicht.php" class="navbar-brand d-flex align-items-center">
+        <a href="category_overzicht.php" class="navbar-brand d-flex align-items-center">
           <strong><svg class="bi bi-arrow-left-short" width="1em" height="1em" style="margin-top: 7px; position: absolute; margin-left: -20px;" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
           <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
           </svg>Terug naar hoofdpagina</strong>
         </a>
             <strong style="color:white">Tim van Andel - Webshop</strong>
-        
           
         </div>
       </div>
@@ -71,8 +63,8 @@ if($qry === false){
 
       <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Product Verweideren</h1>
-            <strong>Weet u zeker dat u dit product wilt verweideren?</strong>    
+          <h1 class="jumbotron-heading">Catogorie Verweideren</h1>
+          <strong>Weet u zeker dat u dit catogorie wilt verweideren?</strong>    
         </div>
       </section>
 
@@ -88,37 +80,26 @@ if($qry === false){
         weight
         active
      -->
-    <?php 
-    while ($product = $qry->fetch_assoc()){
-    ?> 
-    <div class="col-md-4" >
-            <div class="card mb-4 shadow-sm" style="width:350px; float: center;">
-          
-            
+     <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="inputName">Naam:</label><br>
+            <strong id="inputName"><?= $resultSelect['category_name']; ?></strong><br><br>
+        </div>
 
-              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $product['product_image'];?>" />
+        <div class="form-group">
+            <label for="inputDescription">Beschrijving: </label><br>
+            <strong id="inputName"><?= $resultSelect['description']; ?></strong><br><br>
+        </div>
+
+        <div class="form-group">
+            <label for="inputActive">Actief: 1= Actief | 2= Niet Actief |</label><br>
+            <strong id="inputName"><?= $resultSelect['active']; ?></strong>
+        </div>
+
+        
+        <button type="submit" class="btn btn-danger" name="submit">Verweideren</button>
+  </form>
   
-              </svg>
-              <div class="card-body">
-                <p class="card-text">Naam: <?= $product['product_name'];?></p>
-                <small>Categorie: <?= $product['category_name'];?></small><br>
-                <small id="total_places">Prijs: <?= $product['product_price'];?></small><br>
-                 
-                    
-                <form method="POST">
-                <button type="submit" class="btn btn-danger" name="submit">Verweideren</button>
-                </form>
-                  <div class="btn-group">                   
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-
-<?php
-}
-?>
         </div>
       </div>
 
@@ -133,30 +114,16 @@ if($qry === false){
   </body>
 </html>
 <?php
-}
+if (isset($_POST["submit"])){
+$qry = $con->query("DELETE FROM category WHERE id= $id");
+echo "Category Verweiderd";
+header("Location: category_overzicht.php");
+if($con->error){
+  echo "Category kon niet verweiderd worden.";
 
-if(isset($_POST['submit'])){
-   
-    $id = $_GET['del'];
-    $qry = $con->query("DELETE FROM product WHERE id = $id");
-    if($qry === false){   
-        echo mysqli_error($con)." - ";
-        exit(__LINE__);
-    } else {
-    echo "product verweiderd";
-    header("Location: product_overzicht.php");
-    }
-}
+  }
+} 
+ 
+    
+
 ?>
-
-
-<!-- 
-<center>
-</center>
-<br><br>
-<div class="row">
-
-
-          
-           
-   -->
