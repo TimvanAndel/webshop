@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 session_start();
 if (isset($_SESSION['loggedin_customer']) && $_SESSION['loggedin_customer'] == true) {
     
@@ -9,6 +9,7 @@ if (isset($_SESSION['loggedin_customer']) && $_SESSION['loggedin_customer'] == t
     
 
 } else {
-    header("Location: " . BASEHREF . "/view/login_customer.php");
+    $location = "Location: http://localhost/school/Periode_3/php/github/tim-webshop/view/index_customer.php";
+    header($location);
 }
-?>
+?> -->

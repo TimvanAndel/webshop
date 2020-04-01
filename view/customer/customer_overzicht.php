@@ -1,7 +1,7 @@
 <?php
 include("../../src/checklogin_user.php");
 include("../../config/connect.php");
-$qry = $con->query("SELECT * FROM category");
+$qry = $con->query("SELECT * FROM customer ORDER BY lastName");
 if($qry === false){   
 	echo mysqli_error($con)." - ";
 	exit(__LINE__);
@@ -66,8 +66,8 @@ if($qry === false){
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Catogorien</h1>
-          <a href="category_toevoegen.php" class="btn  btn-primary">Catogorie Toevoegen</a><br>
+          <h1 class="jumbotron-heading">Klanten</h1>
+          <a href="customer_toevoegen.php" class="btn btn-primary">Klant Toevoegen</a><br>
           
         </div>
       </section>
@@ -77,7 +77,7 @@ if($qry === false){
         <div class="row" >
 <?php 
 
-while ($category = $qry->fetch_assoc()){
+while ($customer = $qry->fetch_assoc()){
 
  
 
@@ -90,9 +90,9 @@ while ($category = $qry->fetch_assoc()){
             
                    
               <div class="card-body"> 
-                <strong class="card-text">Naam: <?= $category['category_name'];?></strong>
+                <strong class="card-text">Naam: <?= $customer['firstName'] . " " . $customer['middleName'] . " " . $customer['lastName'] ;?></strong>
                 <?php 
-                    echo '<a href=" category_verwijderen.php?del='.$category['id'].'" class="del_btn" style="float: right;margin-right: 20px">
+                    echo '<a href=" customer_verwijderen.php?del='.$customer['id'].'" class="del_btn" style="float: right;margin-right: 20px">
                    
                     <svg class="bi bi-trash-fill" width="25px" height="25px" alt="delete" style="position: absolute;cursor: pointer;" onclick="del()" width="1em" height="1em" viewBox="0 0 16 16" fill="red" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
@@ -101,10 +101,11 @@ while ($category = $qry->fetch_assoc()){
                     
                     ?>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">  
-                  <?='<a href=" category_wijzigen.php?info='.$category['id'].'" class="del_btn" style="margin-top: 20px;">
-                  <button class="btn btn-primary">Categorie wijzigen</button>
-                  </a>'; ?>                     
+                  <div class="btn-group">     
+                    
+                  <?='<a href=" customer_wijzigen.php?info='.$customer['id'].'" class="del_btn" style="margin-top: 20px;">
+                  <button class="btn btn-primary">Klant wijzigen</button>
+                  </a>'; ?>       
                   </div>
                 </div>
               </div>

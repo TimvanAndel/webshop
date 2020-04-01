@@ -3,7 +3,7 @@ include("../../src/checklogin_user.php");
 include("../../config/connect.php");
 
 $id = $_GET['del'];
-$qrySelect = $con->query("SELECT * FROM category WHERE id= $id");
+$qrySelect = $con->query("SELECT * FROM user WHERE id= $id");
 $resultSelect = $qrySelect->fetch_assoc();
 ?>
 
@@ -48,7 +48,7 @@ $resultSelect = $qrySelect->fetch_assoc();
       </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-        <a href="category_overzicht.php" class="navbar-brand d-flex align-items-center">
+        <a href="user_overzicht.php" class="navbar-brand d-flex align-items-center">
           <strong><svg class="bi bi-arrow-left-short" width="1em" height="1em" style="margin-top: 7px; position: absolute; margin-left: -20px;" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
           <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
@@ -64,8 +64,8 @@ $resultSelect = $qrySelect->fetch_assoc();
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Catogorie Verweideren</h1>
-          <strong>Weet u zeker dat u dit catogorie wilt verweideren?</strong>    
+          <h1 class="jumbotron-heading">Gebruiker Verweideren</h1>
+          <strong>Weet u zeker dat u deze gebruiker wilt verweideren?</strong>    
         </div>
       </section>
 
@@ -82,19 +82,37 @@ $resultSelect = $qrySelect->fetch_assoc();
         active
      -->
      <form method="POST" enctype="multipart/form-data">
+        
+        
+
+
         <div class="form-group">
             <label for="inputName">Naam:</label><br>
-            <strong id="inputName"><?= $resultSelect['category_name']; ?></strong><br><br>
+            <strong id="inputName"><?= $resultSelect['firstName'] . " " . $resultSelect["middleName"] . " " . $resultSelect["lastName"] ; ?></strong>
+        </div>
+
+        
+        
+        <div class="form-group">
+            <label for="inputZipcode">Geboortedatum:</label><br>
+            <strong id="inputZipcode"><?= $resultSelect['birthDate']; ?></strong>
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputEmail">Email:</label><br>
+            <strong id="inputEmail"><?= $resultSelect['e-mailadres']; ?></strong>
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputPassword">Wachtwoord:</label><br>
+            <strong id="inputPassword"><?= $resultSelect['password']; ?></strong>
         </div>
 
         <div class="form-group">
-            <label for="inputDescription">Beschrijving: </label><br>
-            <strong id="inputName"><?= $resultSelect['description']; ?></strong><br><br>
-        </div>
-
-        <div class="form-group">
-            <label for="inputActive">Actief: 1= Actief | 2= Niet Actief |</label><br>
-            <strong id="inputName"><?= $resultSelect['active']; ?></strong>
+            <label for="inputNewsletter">Admin:</label><br>
+            <strong id="inputNewsletter"><?= $resultSelect['admin']; ?></strong>
         </div>
 
         
@@ -108,20 +126,20 @@ $resultSelect = $qrySelect->fetch_assoc();
 
     
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
+    
   </body>
 </html>
 <?php
 if (isset($_POST["submit"])){
-$qry = $con->query("DELETE FROM category WHERE id= $id");
-echo "Category Verweiderd";
-header("Location: category_overzicht.php");
+$qry = $con->query("DELETE FROM user WHERE id= $id");
+echo "Customer Verweiderd";
 if($con->error){
-  echo "Category kon niet verweiderd worden.";
+  echo "Customer kon niet verweiderd worden.";
 
+  } else {
+      ?>
+    <script> location.replace("user_overzicht.php"); </script>
+  <?php
   }
 } 
  

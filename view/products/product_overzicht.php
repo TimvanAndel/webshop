@@ -1,4 +1,5 @@
 <?php
+include("../../src/checklogin_user.php");
 include("../../config/connect.php");
 
 $qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,

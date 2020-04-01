@@ -38,6 +38,7 @@ function logIn(){
                 // password check
                 $qry2 = $con->query("SELECT * FROM `user` WHERE `e-mailadres`='$eMail' and password='$passWord'");
 
+                $result2 = $qry2->fetch_assoc();
                 if($qry === false){   
                     echo mysqli_error($con)." - ";
                     exit(__LINE__);
@@ -46,7 +47,8 @@ function logIn(){
                         echo "u bent ingelogd";
                         $_SESSION['loggedin_user'] = true;
                         $_SESSION['email_user'] = $eMail;
-                        $_SESSION['password_user'] = $passWord;                    
+                        $_SESSION['password_user'] = $passWord; 
+                        $_SESSION['id_user'] = $result2[id];
                         header("Location: view/index_user.php");
                     } else{
                         echo "wachtwoord onjuist";

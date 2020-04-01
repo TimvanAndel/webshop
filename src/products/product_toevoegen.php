@@ -63,7 +63,7 @@ function addProduct(){
         echo mysqli_error($con)." - ";
         exit(__LINE__);
     } else {
-
+        $product_id = $con->insert_id;
         echo "Product toegevoegd";
 
         $qry->close();
@@ -71,21 +71,20 @@ function addProduct(){
         // 
         // 
 
-        $qrySelect = $con->query("SELECT id, name FROM product WHERE name = $productName") or die($con->error);
-        $resultSelect = $qrySelect->fetch_assoc();
+       
 
         $qryImage = $con->prepare('INSERT INTO product_image (product_id, image, active) VALUES (?,?,?);');
         if ($qryImage === false) {
             echo mysqli_error($con)." - ";
             exit(__LINE__);
         }
-        $qryImage->bind_param('isi', $resultSelect['id'], $_FILES["fileToUpload"]["name"], $productActive);
+        $qryImage->bind_param('isi', $product_id, $_FILES["fileToUpload"]["name"], $productActive);
         if ($qryImage->execute() === false) {
             echo mysqli_error($con)." - ";
             exit(__LINE__);
         } else {
             echo "img toegevoegd";
-        // header("Location: product_overzicht.php");
+            header("Location: product_overzicht.php");
         } 
 
     }

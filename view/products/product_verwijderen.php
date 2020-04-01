@@ -1,4 +1,5 @@
 <?php
+include("../../src/checklogin_user.php");
 include("../../config/connect.php");
 include("../../src/products/product_verweideren.php");
 $id = $_GET['del'];

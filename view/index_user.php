@@ -1,6 +1,11 @@
 <?php
 include("../src/checklogin_user.php");
 include("../config/connect.php");
+
+
+$id = $_SESSION['id_user'];
+$qry = $con->query("SELECT * FROM user WHERE id = $id ") or die($con->error);
+$result = $qry->fetch_assoc();
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,6 +14,7 @@ include("../config/connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+ 
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Album example for Bootstrap</title>
@@ -111,7 +117,7 @@ include("../config/connect.php");
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">   
 
-                    <form action="category/category_overzicht.php">
+                    <form action="customer/customer_overzicht.php">
                       
                       <small style="font-size: large">Klanten toevoegen, wijzigen of verweideren</small><br>
                       <button type="submit" class="btn btn-primary">Ga naar Klanten</button>
@@ -122,6 +128,34 @@ include("../config/connect.php");
             </div>
           </div>
 
+
+
+
+
+          <?php if($result['admin'] == "1"){ ?>
+          
+          <div class="col-md-4 " style="float: left;">
+            <div class="card mb-4 shadow-sm admin" >
+              <div class="card-body"> 
+              <strong class="card-text" style="font-size: larger;">Admin</strong>
+                <strong class="card-text" style="font-size: larger;">Gebruikers</strong>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">   
+
+                    <form action="user/user_overzicht.php">
+                      
+                      <small style="font-size: large">Gebruikers toevoegen, wijzigen of verweideren</small><br>
+                      <button type="submit" class="btn btn-primary">Ga naar Gebruikers</button>
+                    </form>        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <?php } else {
+          }
+            ?>
 
 
 

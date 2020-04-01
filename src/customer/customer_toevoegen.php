@@ -55,6 +55,8 @@ function setFormData(){
 
     if(isset($_POST['housenumber_addon']) && $_POST['housenumber_addon'] != ''){
         $housenumber_addon = dbp($_POST['housenumber_addon']);
+    } else {
+        $housenumber_addon = " ";
     } 
     
 
@@ -110,7 +112,7 @@ function setFormData(){
     	exit(__LINE__);
     } else {
         echo "Gebruiker toegevoegd";
-        header("Location: login_customer.php");
+        header("Location: customer_overzicht.php");
     	$query1->close();
     }
 
