@@ -1,6 +1,6 @@
 <?php
-include("../src/checklogin_user.php");
 include("../config/connect.php");
+include("../src/checklogin_user.php");
 
 
 $id = $_SESSION['id_user'];
