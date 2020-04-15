@@ -9,7 +9,7 @@ if (isset($_SESSION['loggedin_user']) && $_SESSION['loggedin_user'] == true) {
     
 
 } else {
-    $location = "Location: http://localhost/school/Periode_3/php/github/tim-webshop/index.php";
+    $location = "Location: " . BASEHREF . "index.php";
     header($location);
 }
 ?>

@@ -1,18 +1,17 @@
 <?php
-// database connectie
-include("config/connect.php");
+include("../../config/connect.php");
+session_start();
 
-$qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
-product_image.image AS product_image
-FROM product 
-INNER JOIN product_image ON product.id = product_image.product_id 
-INNER JOIN category ON product.category_id = category.id 
-GROUP BY product.name");
-if($qry === false){   
-	echo mysqli_error($con)." - ";
-	exit(__LINE__);
-} else {
+// var_dump($_SESSION['cart']);
+
+$whereIn = implode(',', $_SESSION['cart']['id']);
+
+
+
 ?>
+
+
+
 
 
 <!doctype html>
@@ -69,24 +68,26 @@ if($qry === false){
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Producten</h1>
-          
+          <h1 class="jumbotron-heading">Winkelmand</h1>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
         <div class="container">
         <div class="row">
+           
 <?php 
 
+$qry = $con->query("SELECT * FROM product WHERE id IN ($whereIn)");
+
+
+if($qry === false){   
+	echo mysqli_error($con)." - ";
+	exit(__LINE__);
+} else {
+
 while ($product = $qry->fetch_assoc()){
-
- 
-
 ?> 
- <!-- <img src="stop.png"     > -->
-
-          
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             
@@ -96,10 +97,9 @@ while ($product = $qry->fetch_assoc()){
   
               </svg>
               <div class="card-body">
-                <p class="card-text">Naam: <?= $product['product_name'];?></p>
-                <small>Categorie: <?= $product['category_name'];?></small><br>
+                <p class="card-text">Naam: <?= $product['name'];?></p>
                 <small id="total_places">Prijs: <?= $product['product_price'];?></small><br>
-                  <?= '<a href="product_wijzigen.php?id='.$product['product_id'].'" class="btn btn-sm btn-outline-primary">Bestellen</a>'; ?>
+                  
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">                   
                   </div>
@@ -116,7 +116,5 @@ while ($product = $qry->fetch_assoc()){
   </body>
 </html>
 <?php
-
 }
-$qry->close();
 ?>

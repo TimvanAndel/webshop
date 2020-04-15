@@ -1,16 +1,11 @@
 <?php
-    include("config/connect.php");
-    include("src/login_user.php");
+// database connectie
+include("config/connect.php");
 
-    if(!empty($_POST)){
-        $chlogin = logIn();
-    }
 
+  $qry_category = $con->query("SELECT * FROM category");
+  
 ?>
-
-
-
-
 
 
 <!doctype html>
@@ -22,13 +17,11 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Log In - Tim van Andel</title>
+    <title>Album example for Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -38,9 +31,14 @@
   <body>
 
     <header>
+
       <div class="collapse bg-dark" id="navbarHeader">
+    
+
         <div class="container">
+
           <div class="row">
+
             <div class="col-sm-8 col-md-7 py-4">
               
               
@@ -49,11 +47,12 @@
         </div>
       </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
+      
+
         <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-            <strong>Tim van Andel - Webshop</strong>
-        </a>
-        
+          
+
+          <strong style="color: white;">Tim van Andel - Webshop</strong>
           
         </div>
       </div>
@@ -63,50 +62,107 @@
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">User Log in</h1>
+          <h1 class="jumbotron-heading">Producten</h1>
+          <form method="GET" style="left: 50%; margin-left: 285px;">
+
+            <select name="filter" class="form-control" style="width: 200px; float: left;">
+            <option value="">Filter</option>
+            <option value="l-h">Prijs Laag - Hoog</option>
+            <option value="h-l">Prijs Hoog - Laag</option>
+            
+            </select>
+
+            <select name="fCategory" id="fCategory" class="form-control" style="width: 200px; float: left;">
+              <option value="">Kies een catogorie</option>
+              <?php while($category = $qry_category->fetch_assoc()){
+                echo "<option value=" . $category['category_name'] . ">" .  $category['category_name'] . "</option>";
+              }
+              ?>
+            
+            
+            </select>
+          
+          <input type="submit" value="Filters Toepassen" class="btn btn-primary" style="float: left; width: 170px">
+          </form>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
         <div class="container">
-<!-- __________________________________________ -->
+        <div class="row">
+           
+<?php 
+  $fqry = "";
+  $f1qry = "";
 
-<form method="post" >
-                      <div class="form-group">
-                         <label>E-mailadres</label>
-                         <input type="text" class="form-control" name="field_email" placeholder="Email" required>
-                      </div>
-                      <div class="form-group">
-                         <label>Wachtwoord</label>
-                         <input type="password" class="form-control" name="field_password" placeholder="Password" required>
-                      </div>
-                      
-                      <button type="submit" class="btn btn-primary">Login</button>
-                      <a href="<?= BASEHREF;?>view/register_user.php" class="btn btn-secondary">Registreer</a>
-                      <div class="form-group" id="message">
-                      
-                      </div>
-                   </form>
+  
+
+  if(isset($_GET['fCategory']) && $_GET['fCategory'] != ""){
+
+    $fCategory = $_GET['fCategory'];
+    $fqry .= "WHERE category_name = '$fCategory'";
+
+  } 
+  if(isset($_GET['filter']) && $_GET['filter'] != ""){
+    $filter = $_GET['filter'];
+    if($filter == "h-l"){
+      $f1qry .= "ORDER BY product.price ASC";
+    }
+    if($filter == "l-h"){
+      $f1qry .= "ORDER BY product.price DESC";
+    }
+  }
+
+
+  $qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
+  product_image.image AS product_image
+  FROM product 
+  INNER JOIN product_image ON product.id = product_image.product_id 
+  INNER JOIN category ON product.category_id = category.id $fqry
+  GROUP BY product_name $f1qry
+  ");
 
 
 
 
+
+if($qry === false){   
+	echo mysqli_error($con)." - ";
+	exit(__LINE__);
+} else {
+
+while ($product = $qry->fetch_assoc()){
+?> 
+          <div class="col-md-4" style="float: left;">
+            <div class="card mb-4 shadow-sm">
+            
+            
+
+              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $product['product_image'];?>" />
+  
+              </svg>
+              <div class="card-body">
+                <p class="card-text">Naam: <?= $product['product_name'];?></p>
+                <small>Categorie: <?= $product['category_name'];?></small><br>
+                <small id="total_places">Prijs: <?= $product['product_price'];?></small><br>
+                  <?= '<a href="view/product/product_detail.php?id='.$product['product_id'].'" class="btn btn-sm btn-outline-primary">Bestellen</a>'; ?>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<?php
+}
+?>  
         </div>
       </div>
-
     </main>
-
-    
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
   </body>
 </html>
 <?php
-if(isset($_POST['logout'])){
-    session_destroy();
-    header("Location: ../index.php");
+
 }
+$qry->close();
 ?>
