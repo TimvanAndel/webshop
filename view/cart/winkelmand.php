@@ -114,7 +114,7 @@ if(isset($_SESSION['cart']['producten']) && !empty($_SESSION['cart']['producten'
     echo "<img width='100px' height='100px' src=" . BASEHREF . "assets/img/" . $productInfo['product_image'] ." />";
     echo $product['titel']."<br>";
     echo $product['prijs']."<br>";
-    echo "<form method='GET' >";
+    echo "<form method='GET'>";
     echo "<input type='number' name='delproduct' hidden value='$key'>";
     echo "<input type='submit' value='Verweideren' style='float: right; margin-top: -135px; margin-right: 10px;' class='btn btn-danger'>";
     echo "</form>";

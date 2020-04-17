@@ -89,10 +89,10 @@ if($qry === false){
         $productkleur = $productInfo['product_color'];
         ?>
         <form action="" method="post" style="float:right;">
-        <input type="hidden" name="product_name" value="<?= $productnaam;?>" />
-        <input type="hidden" name="product_price" value="<?= $productprice;?>" />
-        <input type="hidden" name="product_color" value="<?= $productkleur;?>" />
-        <input type="submit" value="Bestellen" name="submit" class="btn btn-warning">
+          <input type="hidden" name="product_name" value="<?= $productnaam;?>" />
+          <input type="hidden" name="product_price" value="<?= $productprice;?>" />
+          <input type="hidden" name="product_color" value="<?= $productkleur;?>" />
+          <input type="submit" value="Toevoegen aan Winkelmandje" name="submit" class="btn btn-warning">
         </form>
         
         </span>

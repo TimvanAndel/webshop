@@ -25,7 +25,6 @@ include("config/connect.php");
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -163,6 +162,9 @@ while ($product = $qry->fetch_assoc()){
         </div>
       </div>
     </main>
+    
+    <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
+
   </body>
 </html>
 <?php
