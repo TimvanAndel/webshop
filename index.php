@@ -25,7 +25,7 @@ include("config/connect.php");
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -53,7 +53,9 @@ include("config/connect.php");
           
 
           <strong style="color: white;">Tim van Andel - Webshop</strong>
-          
+          <a href="view/cart/winkelmand.php" style="text-decoration: none; color: white;">
+          <i class="fas fa-shopping-basket fa-2x"></i>
+          </a>
         </div>
       </div>
     </header>
@@ -100,7 +102,7 @@ include("config/connect.php");
   if(isset($_GET['fCategory']) && $_GET['fCategory'] != ""){
 
     $fCategory = $_GET['fCategory'];
-    $fqry .= "WHERE category_name = '$fCategory'";
+    $fqry .= "AND category_name = '$fCategory'";
 
   } 
   if(isset($_GET['filter']) && $_GET['filter'] != ""){
@@ -118,7 +120,7 @@ include("config/connect.php");
   product_image.image AS product_image
   FROM product 
   INNER JOIN product_image ON product.id = product_image.product_id 
-  INNER JOIN category ON product.category_id = category.id $fqry
+  INNER JOIN category ON product.category_id = category.id WHERE product.active = '1' $fqry
   GROUP BY product_name $f1qry
   ");
 
@@ -133,6 +135,7 @@ if($qry === false){
 
 while ($product = $qry->fetch_assoc()){
 ?> 
+      <?= '<a href="view/product/product_detail.php?id='.$product['product_id'].'" style="text-decoration: none; color: black;">'; ?>
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             
@@ -153,6 +156,7 @@ while ($product = $qry->fetch_assoc()){
               </div>
             </div>
           </div>
+          <?= '</a>'?>
 <?php
 }
 ?>  

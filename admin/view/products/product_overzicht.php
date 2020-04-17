@@ -2,13 +2,13 @@
 include("../../src/checklogin_user.php");
 include("../../config/connect.php");
 
-$qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
+$qryActive = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
 product_image.image AS product_image
 FROM product 
 INNER JOIN product_image ON product.id = product_image.product_id 
-INNER JOIN category ON product.category_id = category.id 
+INNER JOIN category ON product.category_id = category.id WHERE product.active = '1'
 GROUP BY product.id");
-if($qry === false){   
+if($qryActive === false){   
 	echo mysqli_error($con)." - ";
 	exit(__LINE__);
 } else {
@@ -82,10 +82,12 @@ if($qry === false){
 
       <div class="album py-5 bg-light">
         <div class="container">
+        <h3>Actieve</h3>
+
         <div class="row">
 <?php 
 
-while ($product = $qry->fetch_assoc()){
+while ($productActive = $qryActive->fetch_assoc()){
 
  
 
@@ -96,7 +98,7 @@ while ($product = $qry->fetch_assoc()){
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             <?php 
-                    echo '<a href=" product_verwijderen.php?del='.$product['product_id'].'" class="del_btn">
+                    echo '<a href=" product_verwijderen.php?del='.$productActive['product_id'].'" class="del_btn">
                    
                     <svg class="bi bi-trash-fill" width="25px" height="25px" alt="delete" style="position: absolute;cursor: pointer;" onclick="del()" width="1em" height="1em" viewBox="0 0 16 16" fill="red" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
@@ -106,14 +108,14 @@ while ($product = $qry->fetch_assoc()){
                     ?>
             
 
-              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $product['product_image'];?>" />
+              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $productActive['product_image'];?>" />
   
               </svg>
               <div class="card-body">
-                <p class="card-text">Naam: <?= $product['product_name'];?></p>
-                <small>Categorie: <?= $product['category_name'];?></small><br>
-                <small id="total_places">Prijs: <?= $product['product_price'];?></small><br>
-                  <?= '<a href="product_wijzigen.php?id='.$product['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
+                <p class="card-text">Naam: <?= $productActive['product_name'];?></p>
+                <small>Categorie: <?= $productActive['category_name'];?></small><br>
+                <small id="total_places">Prijs: <?= $productActive['product_price'];?></small><br>
+                  <?= '<a href="product_wijzigen.php?id='.$productActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">                   
                   </div>
@@ -125,12 +127,77 @@ while ($product = $qry->fetch_assoc()){
 }
 ?>  
         </div>
+
+
+        <h3>Non-Actieve</h3>
+        <div class="row">
+
+        
+
+<?php 
+
+$qrynonActive = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
+product_image.image AS product_image
+FROM product 
+INNER JOIN product_image ON product.id = product_image.product_id 
+INNER JOIN category ON product.category_id = category.id WHERE product.active = '2'
+GROUP BY product.id");
+if($qrynonActive === false){   
+	echo mysqli_error($con)." - ";
+	exit(__LINE__);
+} else {
+
+while ($productnonActive = $qrynonActive->fetch_assoc()){
+
+ 
+
+?> 
+ <!-- <img src="stop.png"     > -->
+
+          
+          <div class="col-md-4" style="float: left;">
+            <div class="card mb-4 shadow-sm">
+            <?php 
+                    echo '<a href=" product_verwijderen.php?del='.$productnonActive['product_id'].'" class="del_btn">
+                   
+                    <svg class="bi bi-trash-fill" width="25px" height="25px" alt="delete" style="position: absolute;cursor: pointer;" onclick="del()" width="1em" height="1em" viewBox="0 0 16 16" fill="red" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
+                    </svg>
+                    </a>';
+                    
+                    ?>
+            
+
+              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $productnonActive['product_image'];?>" />
+  
+              </svg>
+              <div class="card-body">
+                <p class="card-text">Naam: <?= $productnonActive['product_name'];?></p>
+                <small>Categorie: <?= $productnonActive['category_name'];?></small><br>
+                <small id="total_places">Prijs: <?= $productnonActive['product_price'];?></small><br>
+                  <?= '<a href="product_wijzigen.php?id='.$productnonActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<?php
+}
+?>  
+        </div>
+
       </div>
     </main>
   </body>
 </html>
 <?php
 
+    
+  }
 }
-$qry->close();
+$qryActive->close();
 ?>
