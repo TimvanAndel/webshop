@@ -52,9 +52,20 @@ include("config/connect.php");
           
 
           <strong style="color: white;">Tim van Andel - Webshop</strong>
-          <a href="view/cart/winkelmand.php" style="text-decoration: none; color: white;">
-          <i class="fas fa-shopping-basket fa-2x"></i>
-          </a>
+          <span>
+          <?php if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == true){
+            echo"<form method='post'>
+              <button type='submit' class='btn btn-primary' name='logout'>Log uit</button>
+              </form>";
+          } else {
+            echo"<a href='view/login_customer' style='text-decoration: none; color: white;margin-top: -5px;'><strong>Login</strong></a>";
+          }
+          ?>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="view/cart/winkelmand" style="text-decoration: none; color: white;">
+              <i class="fas fa-shopping-basket fa-2x"></i>
+            </a>
+          </span>
         </div>
       </div>
     </header>
@@ -116,7 +127,7 @@ include("config/connect.php");
 
 
   $qry = $con->query("SELECT product.id AS product_id, product.name AS product_name, product.price AS product_price, category.category_name AS category_name,
-  product_image.image AS product_image
+  product_image.image AS product_image, product.color AS product_color
   FROM product 
   INNER JOIN product_image ON product.id = product_image.product_id 
   INNER JOIN category ON product.category_id = category.id WHERE product.active = '1' $fqry
@@ -134,7 +145,7 @@ if($qry === false){
 
 while ($product = $qry->fetch_assoc()){
 ?> 
-      <?= '<a href="view/product/product_detail.php?id='.$product['product_id'].'" style="text-decoration: none; color: black;">'; ?>
+      <?= '<a href="view/product/product_detail?id='.$product['product_id'].'" style="text-decoration: none; color: black;">'; ?>
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             
@@ -146,8 +157,11 @@ while ($product = $qry->fetch_assoc()){
               <div class="card-body">
                 <p class="card-text">Naam: <?= $product['product_name'];?></p>
                 <small>Categorie: <?= $product['category_name'];?></small><br>
-                <small id="total_places">Prijs: <?= $product['product_price'];?></small><br>
-                  <?= '<a href="view/product/product_detail.php?id='.$product['product_id'].'" class="btn btn-sm btn-outline-primary">Bestellen</a>'; ?>
+                <small id="total_places">Prijs: &euro;<?= $product['product_price'];?></small><br>
+                  <?= '<a href="view/product/product_detail?id='.$product['product_id'].'" class="btn btn-sm btn-outline-primary">Product Bekijken</a>'; ?>
+
+        
+
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">                   
                   </div>

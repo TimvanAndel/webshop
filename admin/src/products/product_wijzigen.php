@@ -23,7 +23,7 @@ function updateProduct(){
         exit(__LINE__);
     } else {
         echo "Product geupdate";
-        header("Location: product_overzicht.php");
+        header("Location: product_overzicht");
         $query1->close();
         
     }

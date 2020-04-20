@@ -88,6 +88,6 @@ include("../config/connect.php");
 <?php
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: login_customer.php");
+    header("Location: login_customer");
 }
 ?>

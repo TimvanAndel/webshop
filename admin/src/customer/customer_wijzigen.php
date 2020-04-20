@@ -30,7 +30,7 @@ function updateCustomer(){
         exit(__LINE__);
     } else {
         echo "customer geupdate";
-        header("Location: customer_overzicht.php");
+        header("Location: customer_overzicht");
         $query1->close();
         
     }

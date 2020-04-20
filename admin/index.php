@@ -82,7 +82,7 @@
                       </div>
                       
                       <button type="submit" class="btn btn-primary">Login</button>
-                      <a href="<?= BASEHREF;?>view/register_user.php" class="btn btn-secondary">Registreer</a>
+                      <a href="<?= BASEHREF;?>view/register_user" class="btn btn-secondary">Registreer</a>
                       <div class="form-group" id="message">
                       
                       </div>
@@ -107,6 +107,6 @@
 <?php
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: ../index.php");
+    header("Location: ../index");
 }
 ?>

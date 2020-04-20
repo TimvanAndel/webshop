@@ -49,7 +49,7 @@ function logIn(){
                         $_SESSION['email_user'] = $eMail;
                         $_SESSION['password_user'] = $passWord; 
                         $_SESSION['id_user'] = $result2[id];
-                        header("Location: view/index.php");
+                        header("Location: view/index");
                     } else{
                         echo "wachtwoord onjuist";
                     }

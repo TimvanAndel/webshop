@@ -110,7 +110,7 @@ function setFormData(){
     	exit(__LINE__);
     } else {
         echo "Gebruiker toegevoegd";
-        header("Location: login_customer.php");
+        header("Location: login_customer");
     	$query1->close();
     }
 

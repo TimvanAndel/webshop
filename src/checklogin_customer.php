@@ -4,12 +4,12 @@ if (isset($_SESSION['loggedin_customer']) && $_SESSION['loggedin_customer'] == t
     
     if(isset($_POST["logout"])){
         session_destroy();
-        header("Location: login_customer.php");
+        header("Location: login_customer");
     }
     
 
 } else {
-    $location = "Location: http://localhost/school/Periode_3/php/github/tim-webshop/view/index_customer.php";
+    $location = "Location: http://localhost/school/Periode_3/php/github/tim-webshop/view/index_customer";
     header($location);
 }
 ?> -->

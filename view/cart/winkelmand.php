@@ -54,7 +54,7 @@ session_start();
         <div class="container d-flex justify-content-between">
           
 
-        <a href="../../index.php" class="navbar-brand d-flex align-items-center">
+        <a href="../../" class="navbar-brand d-flex align-items-center">
           <strong><svg class="bi bi-arrow-left-short" width="1em" height="1em" style="margin-top: 7px; position: absolute; margin-left: -20px;" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
   <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
@@ -85,7 +85,7 @@ session_start();
          <?php
 
 
-
+$totalprice = 0;
 
 
 if(isset($_GET['delproduct'])){
@@ -113,13 +113,37 @@ if(isset($_SESSION['cart']['producten']) && !empty($_SESSION['cart']['producten'
     echo "<br>";
     echo "<img width='100px' height='100px' src=" . BASEHREF . "assets/img/" . $productInfo['product_image'] ." />";
     echo $product['titel']."<br>";
-    echo $product['prijs']."<br>";
+    echo "&euro;".$product['prijs']."<br>";
+    echo $product['kleur'];
     echo "<form method='GET'>";
     echo "<input type='number' name='delproduct' hidden value='$key'>";
-    echo "<input type='submit' value='Verweideren' style='float: right; margin-top: -135px; margin-right: 10px;' class='btn btn-danger'>";
+    echo "<input type='submit' value='Verweideren' style='float: right; margin-top: -175px; margin-right: 10px;' class='btn btn-danger'>";
     echo "</form>";
     echo "<hr>";
+
+    $totalprice += $product['prijs'];
   }
+  ?>
+  </div>
+  </div>
+
+
+
+  <div class="col-md-4" style="float: right; background-color: transparant; ">
+    <div class="card mb-4 shadow-sm" style="background-color: transparant; border: 0px';">
+    </div>
+  </div>
+
+
+
+  <div class="col-md-4" style="float: right;">
+    <div class="card mb-4 shadow-sm" >
+      <?= "Totaalprijs: &euro;".$totalprice; ?>
+
+
+    </div>
+  </div>
+  <?php
 } else {
   echo "<h5>Er staat nog niks in uw winkelmand!</h5>";
 }

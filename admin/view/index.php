@@ -76,7 +76,7 @@ $result = $qry->fetch_assoc();
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">   
 
-                    <form action="products/product_overzicht.php">
+                    <form action="products/product_overzicht">
                       
                       <small style="font-size: large">producten toevoegen, wijzigen of verweideren</small><br>
                       <button type="submit" class="btn btn-primary">Ga naar producten</button>
@@ -96,7 +96,7 @@ $result = $qry->fetch_assoc();
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">   
 
-                    <form action="category/category_overzicht.php">
+                    <form action="category/category_overzicht">
                       
                       <small style="font-size: large">Catogorieën toevoegen, wijzigen of verweideren</small><br>
                       <button type="submit" class="btn btn-primary">Ga naar Catogorieën</button>
@@ -117,7 +117,7 @@ $result = $qry->fetch_assoc();
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">   
 
-                    <form action="customer/customer_overzicht.php">
+                    <form action="customer/customer_overzicht">
                       
                       <small style="font-size: large">Klanten toevoegen, wijzigen of verweideren</small><br>
                       <button type="submit" class="btn btn-primary">Ga naar Klanten</button>
@@ -142,7 +142,7 @@ $result = $qry->fetch_assoc();
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">   
 
-                    <form action="user/user_overzicht.php">
+                    <form action="user/user_overzicht">
                       
                       <small style="font-size: large">Gebruikers toevoegen, wijzigen of verweideren</small><br>
                       <button type="submit" class="btn btn-primary">Ga naar Gebruikers</button>

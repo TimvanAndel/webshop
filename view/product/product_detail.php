@@ -56,7 +56,7 @@ if($qry === false){
       </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
         <div class="container d-flex justify-content-between">
-        <a href="../../index.php" class="navbar-brand d-flex align-items-center">
+        <a href="../../index" class="navbar-brand d-flex align-items-center">
             <strong><svg class="bi bi-arrow-left-short" width="1em" height="1em" style="margin-top: 7px; position: absolute; margin-left: -20px;" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
             <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
@@ -82,6 +82,10 @@ if($qry === false){
   
         <img style="max-width: 400px;"width="100%" height="300px" src="<?= BASEHREF;?>assets/img/<?= $productInfo['product_image'];?>" />
         <span style="float: right;"><h4>Product Beschrijving:</h4><?= $productInfo['product_description'];?> 
+        <br><br>
+        <span >Kleur: <?= $productInfo['product_color'];?></span>
+        <br>
+        <span >Prijs: &euro;<?= $productInfo['product_price'];?></span>
         <br><br>
         <?php
         $productnaam = $productInfo['product_name'];
@@ -119,7 +123,7 @@ if(isset($_POST['submit'])){
     'kleur' => $_POST['product_color']
   ];
 
-  header("Location: ../cart/winkelmand.php");
+  header("Location: ../cart/winkelmand");
 }
 
 ?>

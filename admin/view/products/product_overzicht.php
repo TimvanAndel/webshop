@@ -57,7 +57,7 @@ if($qryActive === false){
       
 
         <div class="container d-flex justify-content-between">
-          <a href="../index.php" class="navbar-brand d-flex align-items-center">
+          <a href="../index" class="navbar-brand d-flex align-items-center">
           <strong><svg class="bi bi-arrow-left-short" width="1em" height="1em" style="margin-top: 7px; position: absolute; margin-left: -20px;" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 010 .708L5.207 8l2.647 2.646a.5.5 0 01-.708.708l-3-3a.5.5 0 010-.708l3-3a.5.5 0 01.708 0z" clip-rule="evenodd"/>
   <path fill-rule="evenodd" d="M4.5 8a.5.5 0 01.5-.5h6.5a.5.5 0 010 1H5a.5.5 0 01-.5-.5z" clip-rule="evenodd" />
@@ -75,7 +75,7 @@ if($qryActive === false){
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Producten</h1>
-          <a href="product_toevoegen.php" class="btn  btn-primary">Product Toevoegen</a><br>
+          <a href="product_toevoegen" class="btn  btn-primary">Product Toevoegen</a><br>
           
         </div>
       </section>
@@ -98,7 +98,7 @@ while ($productActive = $qryActive->fetch_assoc()){
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             <?php 
-                    echo '<a href=" product_verwijderen.php?del='.$productActive['product_id'].'" class="del_btn">
+                    echo '<a href=" product_verwijderen?del='.$productActive['product_id'].'" class="del_btn">
                    
                     <svg class="bi bi-trash-fill" width="25px" height="25px" alt="delete" style="position: absolute;cursor: pointer;" onclick="del()" width="1em" height="1em" viewBox="0 0 16 16" fill="red" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
@@ -115,7 +115,7 @@ while ($productActive = $qryActive->fetch_assoc()){
                 <p class="card-text">Naam: <?= $productActive['product_name'];?></p>
                 <small>Categorie: <?= $productActive['category_name'];?></small><br>
                 <small id="total_places">Prijs: <?= $productActive['product_price'];?></small><br>
-                  <?= '<a href="product_wijzigen.php?id='.$productActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
+                  <?= '<a href="product_wijzigen?id='.$productActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">                   
                   </div>
@@ -158,7 +158,7 @@ while ($productnonActive = $qrynonActive->fetch_assoc()){
           <div class="col-md-4" style="float: left;">
             <div class="card mb-4 shadow-sm">
             <?php 
-                    echo '<a href=" product_verwijderen.php?del='.$productnonActive['product_id'].'" class="del_btn">
+                    echo '<a href=" product_verwijderen?del='.$productnonActive['product_id'].'" class="del_btn">
                    
                     <svg class="bi bi-trash-fill" width="25px" height="25px" alt="delete" style="position: absolute;cursor: pointer;" onclick="del()" width="1em" height="1em" viewBox="0 0 16 16" fill="red" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
@@ -175,7 +175,7 @@ while ($productnonActive = $qrynonActive->fetch_assoc()){
                 <p class="card-text">Naam: <?= $productnonActive['product_name'];?></p>
                 <small>Categorie: <?= $productnonActive['category_name'];?></small><br>
                 <small id="total_places">Prijs: <?= $productnonActive['product_price'];?></small><br>
-                  <?= '<a href="product_wijzigen.php?id='.$productnonActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
+                  <?= '<a href="product_wijzigen?id='.$productnonActive['product_id'].'" class="btn btn-sm btn-outline-primary">Product wijzigen</a>'; ?>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">                   
                   </div>

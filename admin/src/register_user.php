@@ -57,7 +57,7 @@ function setFormData(){
     	exit(__LINE__);
     } else {
         echo "Gebruiker toegevoegd";
-        header("Location: ../index.php");
+        header("Location: ../index");
         
     	$query1->close();
     }

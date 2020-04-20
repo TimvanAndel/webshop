@@ -42,12 +42,23 @@ function logIn(){
                     echo mysqli_error($con)." - ";
                     exit(__LINE__);
                 } else {
+                    $result = $qry2->fetch_assoc();
                     if($qry2->num_rows == 1){
                         echo "u bent ingelogd";
                         $_SESSION['loggedin_customer'] = true;
+                        $_SESSION['gender'] = $result['gender'];
+                        $_SESSION['firstName'] = $result['firstName'];
+                        $_SESSION['middleName'] = $result['middleName'];
+                        $_SESSION['lastName'] = $result['lastName'];
+                        $_SESSION['street'] = $result['street'];
+                        $_SESSION['houseNumber'] = $resulhouseNumbert['houseNumber'];
+                        $_SESSION['houseNumber_addon'] = $result['houseNumber_addon'];
+                        $_SESSION['zipCode'] = $result['zipCode'];
+                        $_SESSION['city'] = $result['city'];
+                        $_SESSION['phone'] = $result['phone'];
                         $_SESSION['email_customer'] = $eMail;
                         $_SESSION['password_customer'] = $passWord;                    
-                        header("Location: index_customer.php");
+                        header("Location: ../index");
                     } else{
                         echo "wachtwoord onjuist";
                     }

@@ -48,7 +48,7 @@
         <a href="#" class="navbar-brand d-flex align-items-center">
             <strong>Tim van Andel - Webshop</strong>
         </a>
-        <form action="../index.php">
+        <form action="../index">
             <button type="submit" class="btn btn-primary">Log In</button>
         </form>
         
@@ -116,6 +116,6 @@
 <?php
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: ../index.php");
+    header("Location: ../index");
 }
 ?>

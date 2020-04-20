@@ -24,7 +24,7 @@ function addUser() {
         exit(__LINE__);
     } else {
         echo "User toegevoegd";
-        header("Location: user_overzicht.php");
+        header("Location: user_overzicht");
         $query1->close();
     }
 

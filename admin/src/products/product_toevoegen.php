@@ -84,7 +84,7 @@ function addProduct(){
             exit(__LINE__);
         } else {
             echo "img toegevoegd";
-            header("Location: product_overzicht.php");
+            header("Location: product_overzicht");
         } 
 
     }

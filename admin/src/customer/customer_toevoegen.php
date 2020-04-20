@@ -112,7 +112,7 @@ function setFormData(){
     	exit(__LINE__);
     } else {
         echo "Gebruiker toegevoegd";
-        header("Location: customer_overzicht.php");
+        header("Location: customer_overzicht");
     	$query1->close();
     }
 
