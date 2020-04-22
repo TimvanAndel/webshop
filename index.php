@@ -2,7 +2,7 @@
 // database connectie
 include("config/connect.php");
 
-
+session_start();
   $qry_category = $con->query("SELECT * FROM category");
   
 ?>
@@ -54,15 +54,21 @@ include("config/connect.php");
           <strong style="color: white;">Tim van Andel - Webshop</strong>
           <span>
           <?php if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == true){
-            echo"<form method='post'>
+            echo"<a href='view/customer/customer_info' style='float: left; margin-right: 20px;'><button class='btn btn-info'>Mijn Account</button></a>
+          
+              <form method='post' style='float: left;'>
               <button type='submit' class='btn btn-primary' name='logout'>Log uit</button>
               </form>";
+              if(isset($_POST['logout'])){
+                session_destroy();
+                header("Refresh:0");
+              }
           } else {
             echo"<a href='view/login_customer' style='text-decoration: none; color: white;margin-top: -5px;'><strong>Login</strong></a>";
           }
           ?>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="view/cart/winkelmand" style="text-decoration: none; color: white;">
+            <a href="view/cart/winkelmand" style="text-decoration: none; color: white;float: right;">
               <i class="fas fa-shopping-basket fa-2x"></i>
             </a>
           </span>
@@ -177,12 +183,12 @@ while ($product = $qry->fetch_assoc()){
       </div>
     </main>
     
-    <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
 
   </body>
+  <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
+
 </html>
 <?php
-
 }
 $qry->close();
 ?>

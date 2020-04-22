@@ -122,6 +122,7 @@ if(isset($_SESSION['cart']['producten']) && !empty($_SESSION['cart']['producten'
     echo "<hr>";
 
     $totalprice += $product['prijs'];
+    
   }
   ?>
   </div>
@@ -138,9 +139,11 @@ if(isset($_SESSION['cart']['producten']) && !empty($_SESSION['cart']['producten'
 
   <div class="col-md-4" style="float: right;">
     <div class="card mb-4 shadow-sm" >
-      <?= "Totaalprijs: &euro;".$totalprice; ?>
-
-
+    <br><br>
+      <?= "<h4 style='text-align: center;'>Totaalprijs: &euro;".$totalprice . "</h4>"; ?>
+      <br><br>
+      <a href="bestellen" class="btn btn-warning" style="width: 200px;margin-left: 75px;">Bestellen</a>
+      <br><br>
     </div>
   </div>
   <?php

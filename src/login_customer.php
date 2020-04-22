@@ -46,12 +46,13 @@ function logIn(){
                     if($qry2->num_rows == 1){
                         echo "u bent ingelogd";
                         $_SESSION['loggedin_customer'] = true;
+                        $_SESSION['customer_id'] = $result['id'];
                         $_SESSION['gender'] = $result['gender'];
                         $_SESSION['firstName'] = $result['firstName'];
                         $_SESSION['middleName'] = $result['middleName'];
                         $_SESSION['lastName'] = $result['lastName'];
                         $_SESSION['street'] = $result['street'];
-                        $_SESSION['houseNumber'] = $resulhouseNumbert['houseNumber'];
+                        $_SESSION['houseNumber'] = $result['houseNumber'];
                         $_SESSION['houseNumber_addon'] = $result['houseNumber_addon'];
                         $_SESSION['zipCode'] = $result['zipCode'];
                         $_SESSION['city'] = $result['city'];
