@@ -35,6 +35,11 @@ function setFormData(){
         $delivery = $con->real_escape_string($delivery);
 
 
+        $status = "In Behandeld";
+        $status = $con->real_escape_string($status);
+
+
+
         $date = date("Y-m-d H:i:s");
         $date = $con->real_escape_string($date);
 
@@ -46,16 +51,16 @@ function setFormData(){
             $customer_id = $con->real_escape_string('0');
         }
 
-        $query1 = $con->prepare('INSERT INTO tbl_order (customer_id, date, street, houseNumber, houseNumber_addon, zipCode, city, country, payment_method, paid, delivery) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+        $query1 = $con->prepare('INSERT INTO tbl_order (customer_id, date, street, houseNumber, houseNumber_addon, zipCode, city, country, payment_method, price, paid, delivery, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
         if ($query1 === false) {
             echo mysqli_error($con)." - ";
             exit(__LINE__);
         }
 
         if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == true){
-            $query1->bind_param('ississsssis', $customer_id, $date, $street, $houseNumber, $houseNumber_addon, $zipCode, $city, $phone, $paymentmethod, $paid, $delivery);
+            $query1->bind_param('ississsssiiss', $customer_id, $date, $street, $houseNumber, $houseNumber_addon, $zipCode, $city, $phone, $paymentmethod, $price, $paid, $delivery, $status);
         } else {
-            $query1->bind_param('ississsssis', $customer_id, $date, $street, $houseNumber, $houseNumber_addon, $zipCode, $city, $phone, $paymentmethod, $paid, $delivery);
+            $query1->bind_param('ississsssiiss', $customer_id, $date, $street, $houseNumber, $houseNumber_addon, $zipCode, $city, $phone, $paymentmethod, $price, $paid, $delivery, $status);
         }
 
         if ($query1->execute() === false) {
@@ -87,6 +92,7 @@ function setFormData(){
                 } else {
                 // echo "hi";
                 $query2->close();
+                $_SESSION['cart']['producten'] = [];
                 header("Location: ../../");
 
                 }

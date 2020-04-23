@@ -89,17 +89,19 @@ if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == t
         </div>
       </section>
       <?php
-        $customer_id = $_SESSION['customer_id'];
-
-        $qry = $con->query("SELECT tbl_order.id AS order_id, tbl_order.customer_id AS customer_id, tbl_order.date AS date, tbl_order.payment_method AS payment_method, tbl_order.price AS price, tbl_order.paid AS paid, tbl_order.status AS status 
+        $id = $_GET['order'];
+        $qry = $con->query("SELECT product.name AS product_name, product.color AS product_color, product.price AS product_price
         FROM tbl_order 
-        INNER JOIN customer ON tbl_order.customer_id = customer.id
-        WHERE customer.id = $customer_id
-        ") or die($con->error);
-
+        INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id
+        INNER JOIN product ON tbl_order_detail.product_id = product.id
+        WHERE tbl_order.id = $id") or die($con->error);
         
 
-
+        $qry_totalprice = $con->query("SELECT tbl_order.price AS totalprice
+        FROM tbl_order 
+        INNER JOIN tbl_order_detail ON tbl_order.id = tbl_order_detail.order_id
+        INNER JOIN product ON tbl_order_detail.product_id = product.id
+        WHERE tbl_order.id = $id LIMIT 1") or die($con->error);
 
 
 
@@ -114,59 +116,21 @@ if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == t
         <div class="container">
         <h4>Uw Bestellingen</h4>
         <div class="row">
-        <style>
-        td{
-          border-bottom: 1px solid grey;
-          width: 25%;
-        }
-        th{
-          width: 25%;
-          border-bottom: 1px solid grey;
-        }
-        table tr:nth-child(even) {
-        background-color: #eee;
-        }
-        table tr:nth-child(odd) {
-        background-color: #fff;
-        }
-        </style>
+    
         <div class="col-md-4" style="float: left;">
         <div class="card mb-4 shadow-sm" style="width: 275%;">
-              <table>
-              <tr>
-                <th>Datum</th>
-                <th>Prijs</th>
-                <th>Betaald</th>
-                <th>Satus</th>
-                <th>Bekijk Bestelling</th>
-              </tr>
-              <?php while($result = $qry->fetch_assoc()){
-       
-
-              $phpdate = strtotime( $result['date'] );
-              $mysqldate = date( 'd-m-Y H:i:s', $phpdate );
-
-
-                if($result['paid'] == 0){
-                  $paid = 'nee';
-                } else {
-                  $paid = 'ja';
-                }
-
-                
-                ?>
-                <tr>
-                <td><?= $mysqldate ?></td>
-                <td><?= "&euro;".$result['price'] ?></td>
-                <td><?= $paid ?></td>
-                <td><?= $result['status'] ?></td>
-                <td><a href="bestelling_bekijken?order=<?=$result['order_id']?>">Bekijk hier</a></td>
-                </tr>
-                <?php
-              }
-              ?>
-              
-              </table>
+        <?php 
+        while($totalprice = $qry_totalprice->fetch_assoc()){
+            echo "<div style='text-align: right;'>Totaal prijs: &euro;".$totalprice['totalprice']."</div>";
+        }
+        while($result = $qry->fetch_assoc()){
+            echo $result['product_name']."<br>";
+            echo $result['product_color']."<br>";
+            echo "&euro;".$result['product_price']."<br>";
+            echo "<hr style='width: 10%;'>";
+        }          
+        
+        ?>
 
         </div>
         </div>
@@ -183,4 +147,3 @@ if(isset($_SESSION['loggedin_customer'] ) && $_SESSION['loggedin_customer'] == t
   <script src="https://kit.fontawesome.com/caef1a2785.js" crossorigin="anonymous"></script>
 
 </html>
-
