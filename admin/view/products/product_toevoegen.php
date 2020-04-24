@@ -24,9 +24,9 @@ if(!empty($_POST)){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="icon" href="../../assets/favicon/apple.png">
 
-    <title>Album example for Bootstrap</title>
+    <title>Tim van Andel - Producten</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 

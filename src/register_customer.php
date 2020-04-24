@@ -56,6 +56,9 @@ function setFormData(){
     if(isset($_POST['housenumber_addon']) && $_POST['housenumber_addon'] != ''){
         $housenumber_addon = dbp($_POST['housenumber_addon']);
     } 
+    if(isset($_POST['housenumber_addon']) == ''){
+        $housenumber_addon = 0;
+    }
     
 
     if(isset($_POST['zipcode']) && $_POST['zipcode'] != ''){

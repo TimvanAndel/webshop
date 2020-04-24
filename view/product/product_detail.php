@@ -26,9 +26,9 @@ if($qry === false){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="icon" href="../../assets/favicon/apple.png">
 
-    <title>Album example for Bootstrap</title>
+    <title>Tim van Andel - Product</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
@@ -80,7 +80,7 @@ if($qry === false){
       <div class="album py-5 bg-light">
         <div class="container">
   
-        <img style="max-width: 400px;"width="100%" height="300px" src="<?= BASEHREF;?>assets/img/<?= $productInfo['product_image'];?>" />
+        <img style="max-width: 400px;"width="100%" height="100%" src="<?= BASEHREF;?>admin/assets/img/<?= $productInfo['product_image'];?>" />
         <span style="float: right;"><h4>Product Beschrijving:</h4><?= $productInfo['product_description'];?> 
         <br><br>
         <span >Kleur: <?= $productInfo['product_color'];?></span>

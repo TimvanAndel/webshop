@@ -35,7 +35,7 @@ function setFormData(){
         $delivery = $con->real_escape_string($delivery);
 
 
-        $status = "In Behandeld";
+        $status = "In Behandeling";
         $status = $con->real_escape_string($status);
 
 

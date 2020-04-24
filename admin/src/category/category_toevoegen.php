@@ -18,6 +18,7 @@ function addCategory(){
         exit(__LINE__);
     } else {
         echo "Category toegevoegd";
+        header("Location: category_overzicht");
         $qry->close();
     }
 }
