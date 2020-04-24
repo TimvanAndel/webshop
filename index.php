@@ -17,7 +17,7 @@ session_start();
     <meta name="author" content="">
     <link rel="icon" href="assets/favicon/apple.png">
 
-    <title>Album example for Bootstrap</title>
+    <title>Tim van Andel</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
