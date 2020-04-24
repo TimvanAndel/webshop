@@ -15,7 +15,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="icon" href="assets/favicon/apple.png">
 
     <title>Album example for Bootstrap</title>
 
@@ -124,11 +124,13 @@ session_start();
   if(isset($_GET['filter']) && $_GET['filter'] != ""){
     $filter = $_GET['filter'];
     if($filter == "h-l"){
-      $f1qry .= "ORDER BY product.price ASC";
-    }
-    if($filter == "l-h"){
       $f1qry .= "ORDER BY product.price DESC";
     }
+    if($filter == "l-h"){
+      $f1qry .= "ORDER BY product.price ASC";
+    }
+  } else {
+    $f1qry .= "ORDER BY category.category_name DESC";
   }
 
 
@@ -157,7 +159,7 @@ while ($product = $qry->fetch_assoc()){
             
             
 
-              <img width="100%" height="225" src="<?= BASEHREF;?>assets/img/<?= $product['product_image'];?>" />
+              <img  style="max-height: 255px;"width="100%" height="255px" src="<?= BASEHREF;?>admin/assets/img/<?= $product['product_image'];?>" />
   
               </svg>
               <div class="card-body">
